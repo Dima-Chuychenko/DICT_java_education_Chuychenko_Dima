@@ -8,6 +8,7 @@ public class ChatBot {
         NameBotAndBD(scanner);
         GuessUserAge(scanner);
         CountingRoom(scanner);
+        QuestionTask(scanner);
     }
 
     static void NameBotAndBD(Scanner scanner) {
@@ -20,6 +21,7 @@ public class ChatBot {
         user_name = scanner.nextLine();
         System.out.println("Nice to meet you, " + user_name + "!");
     }
+
     static void GuessUserAge(Scanner scanner) {
         int age;
         int remainder3, remainder5, remainder7;
@@ -31,12 +33,34 @@ public class ChatBot {
         age = (remainder3 * 70 + remainder5 * 21 + remainder7 * 15) % 105;
         System.out.println("Your age is " + age + "; that's a good time to change job");
     }
+
     static void CountingRoom(Scanner scanner) {
         System.out.println("Now I will prove to you that I can count to any positive number you want.");
         int count = scanner.nextInt();
         for (int i = 0; i <= count; i++) {
             System.out.println(i + " !");
         }
+    }
+
+    static void QuestionTask(Scanner scanner) {
+        System.out.println("Let's test your programming knowledge.");
+        System.out.println("Select a line containing only logical operators from Java?");
+        System.out.println("1. $, !, !=, ^");
+        System.out.println("2. ||, &&, !=");
+        System.out.println("3. !=, %, ||, &&");
+        System.out.println("4. *, ==, !=, &&, ||");
+        System.out.println("5. ||, |, &&, &, @");
+        int answer;
+        do {
+            answer = scanner.nextInt();
+            if (answer == 2) {
+                System.out.println("You right!\nGoodbye, have a nice day!");
+                break;
+            } else {
+                System.out.println("Try again.");
+            }
+        }
+        while (answer != 2);
     }
 }
 
