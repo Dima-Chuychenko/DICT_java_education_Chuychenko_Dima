@@ -7,6 +7,7 @@ public class ChatBot {
         Scanner scanner = new Scanner(System.in);
         NameBotAndBD(scanner);
         GuessUserAge(scanner);
+        CountingRoom(scanner);
     }
 
     static void NameBotAndBD(Scanner scanner) {
@@ -29,6 +30,13 @@ public class ChatBot {
         remainder7 = scanner.nextInt();
         age = (remainder3 * 70 + remainder5 * 21 + remainder7 * 15) % 105;
         System.out.println("Your age is " + age + "; that's a good time to change job");
+    }
+    static void CountingRoom(Scanner scanner) {
+        System.out.println("Now I will prove to you that I can count to any positive number you want.");
+        int count = scanner.nextInt();
+        for (int i = 0; i <= count; i++) {
+            System.out.println(i + " !");
+        }
     }
 }
 
