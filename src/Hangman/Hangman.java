@@ -1,4 +1,5 @@
 package Hangman;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Hangman {
@@ -13,8 +14,10 @@ public class Hangman {
 
     public static void Game(){
         Scanner scanner = new Scanner(System.in);
-        String secretWord = "java";
-        String hiddenWord = "____";
+        String[] words = {"python", "java", "javascript", "kotlin"};
+        Random random = new Random();
+        String secretWord = words[random.nextInt(words.length)];
+        String hiddenWord = secretWord.substring(0, 2) + "-".repeat(secretWord.length() - 2);
         int attempts = 5;
 
         System.out.println("HANGMAN");
