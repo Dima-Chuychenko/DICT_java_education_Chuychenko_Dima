@@ -1,13 +1,14 @@
 package Hangman;
+
 import java.util.Random;
 import java.util.Scanner;
 
 public class Hangman {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Game();
     }
 
-    public static void Game(){
+    public static void Game() {
         Scanner scanner = new Scanner(System.in);
         String[] words = {"python", "java", "javascript", "kotlin"};
         Random random = new Random();
@@ -20,15 +21,20 @@ public class Hangman {
 
         while (health > 0) {
 
-            System.out.println("Input a letter: > ");
+            System.out.print("Input a letter: > ");
             String guess = scanner.nextLine().toLowerCase();
 
             boolean found = false;
 
             for (int i = 0; i < secretWord.length(); i++) {
                 if (secretWord.charAt(i) == guess.charAt(0)) {
-                    hiddenWord.setCharAt(i, guess.charAt(0));
-                    found = true;
+                    if (hiddenWord.charAt(i) == '-') {
+                        hiddenWord.setCharAt(i, guess.charAt(0));
+                        found = true;
+                    } else {
+                        System.out.println("No improvements");
+                        found = true;
+                    }
                 }
             }
 
