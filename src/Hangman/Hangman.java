@@ -5,7 +5,30 @@ import java.util.Scanner;
 
 public class Hangman {
     public static void main(String[] args) {
-        Game();
+        Menu();
+    }
+
+    public static void Menu(){
+        Scanner scanner = new Scanner(System.in);
+        String choice;
+
+        do {
+            System.out.println("Type 'play' to play the game, 'exit' to quit: ");
+            choice = scanner.nextLine().toLowerCase();
+
+            switch (choice) {
+                case "play":
+                    System.out.println("----------");
+                    Game();
+                    break;
+                case "exit":
+                    System.out.println("Goodbye!");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter 'play' or 'exit'.");
+                    break;
+            }
+        } while (!choice.equals("exit"));
     }
 
     public static void Game() {
@@ -33,11 +56,6 @@ public class Hangman {
                 continue;
             }
 
-            if (hiddenWord.indexOf(guess) != -1) {
-                System.out.println("You've already guessed this letter.");
-                continue;
-            }
-
             boolean found = false;
 
             for (int i = 0; i < secretWord.length(); i++) {
@@ -46,8 +64,7 @@ public class Hangman {
                         hiddenWord.setCharAt(i, guess.charAt(0));
                         found = true;
                     } else {
-                        System.out.println("No improvements");
-                        found = true;
+                        System.out.println("You've already guessed this letter.");
                     }
                 }
             }
@@ -59,9 +76,8 @@ public class Hangman {
 
             System.out.println(hiddenWord);
 
-            if (hiddenWord.indexOf("-") == -1) {
-                System.out.println("You!\n" +
-                        "We'll see how well you did in the next stage");
+            if (hiddenWord.indexOf("-") == -1 && health >= 1) {
+                System.out.println("You guessed the word!\nYou survived!");
                 return;
             }
         }
