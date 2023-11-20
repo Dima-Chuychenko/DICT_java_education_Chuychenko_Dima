@@ -4,12 +4,7 @@ import java.util.Scanner;
 
 public class Hangman {
     public static void main(String[] args){
-        Scanner scanner = new Scanner(System.in);
-        Print();
         Game();
-    }
-    public static void Print(){
-        System.out.println("HANGMAN\nThe game will be available soon.");
     }
 
     public static void Game(){
@@ -18,7 +13,7 @@ public class Hangman {
         Random random = new Random();
         String secretWord = words[random.nextInt(words.length)];
         String hiddenWord = secretWord.substring(0, 2) + "-".repeat(secretWord.length() - 2);
-        int attempts = 5;
+        int attempts = 8;
 
         System.out.println("HANGMAN");
         System.out.println("Guess the word: " + hiddenWord);
