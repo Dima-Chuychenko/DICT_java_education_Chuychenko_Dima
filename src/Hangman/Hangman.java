@@ -12,25 +12,42 @@ public class Hangman {
         String[] words = {"python", "java", "javascript", "kotlin"};
         Random random = new Random();
         String secretWord = words[random.nextInt(words.length)];
-        String hiddenWord = secretWord.substring(0, 2) + "-".repeat(secretWord.length() - 2);
-        int attempts = 8;
+        StringBuilder hiddenWord = new StringBuilder("-".repeat(secretWord.length()));
+        int health = 8;
 
         System.out.println("HANGMAN");
-        System.out.println("Guess the word: " + hiddenWord);
+        System.out.println(hiddenWord);
 
-        while (attempts > 0) {
-            String guess = scanner.nextLine();
+        while (health > 0) {
 
-            if (guess.equalsIgnoreCase(secretWord)) {
-                System.out.println("You survived!");
+            System.out.println("Input a letter: > ");
+            String guess = scanner.nextLine().toLowerCase();
+
+            boolean found = false;
+
+            for (int i = 0; i < secretWord.length(); i++) {
+                if (secretWord.charAt(i) == guess.charAt(0)) {
+                    hiddenWord.setCharAt(i, guess.charAt(0));
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                health--;
+                System.out.println("That letter doesn't appear in the word");
+            }
+
+            System.out.println(hiddenWord);
+
+            if (hiddenWord.indexOf("-") == -1) {
+                System.out.println("Thanks for playing!\n" +
+                        "We'll see how well you did in the next stage");
                 return;
-            } else {
-                attempts--;
-                System.out.println("Guess the word: " + hiddenWord);
             }
         }
 
-        System.out.println("You lost!");
+        System.out.println("Thanks for playing!\n" +
+                "We'll see how well you did in the next stage");
     }
 
 }
