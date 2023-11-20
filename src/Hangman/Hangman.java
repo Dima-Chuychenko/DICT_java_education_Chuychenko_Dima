@@ -71,7 +71,7 @@ public class Hangman {
 
             if (!found) {
                 health--;
-                System.out.println("That letter doesn't appear in the word");
+                System.out.println("That letter doesn't appear in the word.");
             }
 
             System.out.println(hiddenWord);
