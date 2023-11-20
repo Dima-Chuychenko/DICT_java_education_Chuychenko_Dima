@@ -20,9 +20,23 @@ public class Hangman {
         System.out.println(hiddenWord);
 
         while (health > 0) {
-
             System.out.print("Input a letter: > ");
-            String guess = scanner.nextLine().toLowerCase();
+            String guess = scanner.nextLine();
+
+            if (!Character.isLowerCase(guess.charAt(0))) {
+                System.out.println("Please enter a lowercase English letter.");
+                continue;
+            }
+
+            if (guess.length() != 1) {
+                System.out.println("You should input a single letter.");
+                continue;
+            }
+
+            if (hiddenWord.indexOf(guess) != -1) {
+                System.out.println("You've already guessed this letter.");
+                continue;
+            }
 
             boolean found = false;
 
@@ -51,9 +65,7 @@ public class Hangman {
                 return;
             }
         }
-
-        System.out.println("Thanks for playing!\n" +
-                "We'll see how well you did in the next stage");
+        System.out.println("You lost!");
     }
 
 }
