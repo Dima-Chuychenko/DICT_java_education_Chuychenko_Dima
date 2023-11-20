@@ -13,7 +13,7 @@ public class Hangman {
         String choice;
 
         do {
-            System.out.println("Type 'play' to play the game, 'exit' to quit: ");
+            System.out.print("Type 'play' to play the game, 'exit' to quit: ");
             choice = scanner.nextLine().toLowerCase();
 
             switch (choice) {
