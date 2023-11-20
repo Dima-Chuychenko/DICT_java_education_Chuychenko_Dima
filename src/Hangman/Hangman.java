@@ -40,7 +40,7 @@ public class Hangman {
             System.out.println(hiddenWord);
 
             if (hiddenWord.indexOf("-") == -1) {
-                System.out.println("Thanks for playing!\n" +
+                System.out.println("You!\n" +
                         "We'll see how well you did in the next stage");
                 return;
             }
