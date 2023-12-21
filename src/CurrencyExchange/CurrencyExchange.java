@@ -1,31 +1,41 @@
 package CurrencyExchange;
 
-import java.text.DecimalFormat;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import org.json.JSONObject;
+
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 public class CurrencyExchange {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        HttpClient client = HttpClient.newHttpClient();
 
-        System.out.print("Please, enter the number of coins you have: ");
-        double myCoins = scanner.nextDouble();
+        try {
+            // Запрашиваем код валюты
+            System.out.print("Please, enter the currency code (USD, EUR): ");
+            String currencyCode = new java.util.Scanner(System.in).nextLine().toUpperCase();
 
-        // Курси обміну для різних валют
-        Map<String, Double> exchangeRates = new HashMap<>();
-        exchangeRates.put("ARS", 0.82);
-        exchangeRates.put("HNL", 0.17);
-        exchangeRates.put("AUD", 1.9622);
-        exchangeRates.put("MAD", 0.208);
+            // Формируем запрос на сайт для заданной валюты
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("http://www.floatrates.com/daily/" + currencyCode + ".json"))
+                    .build();
 
-        DecimalFormat df = new DecimalFormat("#.##");
+            // Получаем ответ на запрос
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        for (Map.Entry<String, Double> entry : exchangeRates.entrySet()) {
-            String currency = entry.getKey();
-            double rate = entry.getValue();
-            double result = myCoins * rate;
-            System.out.println("I will get " + df.format(result) + " " + currency + " from the sale of " + df.format(myCoins) + " mycoins.");
+            // Обрабатываем JSON-ответ
+            JSONObject jsonObject = new JSONObject(response.body());
+
+            // Получаем курс для доллара (USD) и евро (EUR)
+            double usdRate = jsonObject.getJSONObject("usd").getDouble("rate");
+            double eurRate = jsonObject.getJSONObject("eur").getDouble("rate");
+
+            System.out.println("USD rate: " + usdRate);
+            System.out.println("EUR rate: " + eurRate);
+
+        } catch (Exception excep) {
+            excep.printStackTrace();
         }
     }
 }
