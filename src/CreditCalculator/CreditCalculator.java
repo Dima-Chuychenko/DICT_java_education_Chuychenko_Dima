@@ -4,7 +4,7 @@ public class CreditCalculator {
 
     public static void main(String[] args) {
         if (args.length < 4) {
-            System.out.println("Usage: java CreditCalculator -Dtype=[n/a/p/d] -Dprincipal=[value] -Dperiods=[value] -Dinterest=[value]");
+            System.out.println("Usage: javac CreditCalculator -Dtype=[n/a/p/d] -Dprincipal=[value] -Dperiods=[value] -Dinterest=[value]");
             return;
         }
 
